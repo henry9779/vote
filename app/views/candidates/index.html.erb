@@ -7,6 +7,7 @@
         <table>
             <tr>
                 <td></td>
+                <td>Votes</td>
                 <td>Name</td>
                 <td>Age</td>
                 <td>Party</td>
@@ -17,6 +18,9 @@
                 <tr>
                     <td>
                         <%= link_to 'vote',vote_candidate_path(candidate.id), method: 'post' %>
+                    </td>
+                    <td>
+                        <%= candidate.vote %>
                     </td>
                     <td>
                         <%= link_to candidate.name, candidate_path(candidate.id) %>

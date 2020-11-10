@@ -47,7 +47,8 @@ class CandidatesController < ApplicationController
 
   def vote
     @candidate = Candidate.find_by(id: params[:id])
-    @candidate.vote = @candidate.vote + 1
+    #@candidate.vote = @candidate.vote + 1
+    @candidate.increment(:vote)
     @candidate.save
     flash[:notice] = "Voted !"
     redirect_to '/candidates'
