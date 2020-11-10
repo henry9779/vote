@@ -1,6 +1,6 @@
-<% if @candidate.errors.any? %>
+<% if candidate.errors.any? %>
     <ul>
-        <% @candidate.errors.full_messages.each do |message| %>
+        <% candidate.errors.full_messages.each do |message| %>
             <li>
                 <%= message %>
             </li>
@@ -8,7 +8,7 @@
     </ul>
     <% end %>
 
-        <%= form_for(@candidate) do |form| %>
+        <%= form_for(candidate) do |form| %>
 
             <div>
                 <%= form.label :name %>
