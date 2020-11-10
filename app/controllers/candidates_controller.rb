@@ -1,5 +1,7 @@
 class CandidatesController < ApplicationController
 
+  before_action :candidate_id, only: [:show, :edit, :update, :destroy, :vote]
+
   def index
     @candidates = Candidate.all
   end
@@ -12,44 +14,38 @@ class CandidatesController < ApplicationController
     @candidate = Candidate.new(candidate_params)
 
     if @candidate.save
-      flash[:notice] = "Candidate created !"
-      redirect_to '/candidates'
+      redirect_to '/candidates', notice: 'Candidate Created!'
     else
       render :new
     end
   end
 
   def show
-    @candidate = Candidate.find_by(id: params[:id])
   end
 
   def edit
-    @candidate = Candidate.find_by(id: params[:id])
   end
 
   def update
-    @candidate = Candidate.find_by(id: params[:id])
 
     if @candidate.update(candidate_params)
-      flash[:notice] = "Candidate Updated !"  
-      redirect_to '/candidates'
+      redirect_to '/candidates', notice: 'Candidate Updated!'
     else
       render :edit
     end
   end
 
   def destroy
-    @candidate = Candidate.find_by(id: params[:id])
     @candidate.destroy
-    flash[:notice] = "Candidate Deleted !"
-    redirect_to '/candidates'
+    redirect_to '/candidates', notice: 'Candidate Deleted!'
   end
 
   def vote
-    @candidate = Candidate.find_by(id: params[:id])
     #@candidate.vote = @candidate.vote + 1
-    @candidate.increment(:vote)
-    @candidate.save
+    @candidate.vote_logs.create(ip_address:request.remote_ip)
+    # VoteLog.create(candidate: @candidate, ip_address: request.remote_ip) 投票紀錄
+    # @candidate.increment(:vote) 遞增投票
+    # @candidate.save 存檔
     flash[:notice] = "Voted !"
     redirect_to '/candidates'
   end
@@ -58,6 +54,10 @@ class CandidatesController < ApplicationController
   private
   def candidate_params
     params.require(:candidate).permit(:name, :party, :age, :politics)
+  end
+
+  def candidate_id
+    @candidate = Candidate.find_by(id: params[:id])
   end
 
 end
