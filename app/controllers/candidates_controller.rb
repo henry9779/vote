@@ -45,6 +45,14 @@ class CandidatesController < ApplicationController
     redirect_to '/candidates'
   end
 
+  def vote
+    @candidate = Candidate.find_by(id: params[:id])
+    @candidate.vote = @candidate.vote + 1
+    @candidate.save
+    flash[:notice] = "Voted !"
+    redirect_to '/candidates'
+  end
+
 
   private
   def candidate_params

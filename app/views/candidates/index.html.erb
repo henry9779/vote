@@ -6,6 +6,7 @@
 
         <table>
             <tr>
+                <td></td>
                 <td>Name</td>
                 <td>Age</td>
                 <td>Party</td>
@@ -14,6 +15,9 @@
 
             <% @candidates.each do |candidate| %>
                 <tr>
+                    <td>
+                        <%= link_to 'vote',vote_candidate_path(candidate.id), method: 'post' %>
+                    </td>
                     <td>
                         <%= link_to candidate.name, candidate_path(candidate.id) %>
                             </a>
