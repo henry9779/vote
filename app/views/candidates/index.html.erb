@@ -1,5 +1,7 @@
-<h1>Vote System</h1>
 <%= flash[:notice] %>
+
+    <h1>Vote System</h1>
+
     <%= link_to 'Add Candidate', new_candidate_path %>
 
         <table>
@@ -24,6 +26,9 @@
                     </td>
                     <td>
                         <%= link_to 'update' ,edit_candidate_path(candidate.id) %>
+                    </td>
+                    <td>
+                        <%= link_to 'delete', candidate_path(candidate.id), method: 'delete', data: {confirm: 'Are you sure?'} %>
                     </td>
                 </tr>
                 <% end %>
