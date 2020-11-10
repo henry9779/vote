@@ -23,6 +23,10 @@ class CandidatesController < ApplicationController
     @candidate = Candidate.find_by(id: params[:id])
   end
 
+  def edit
+    
+  end
+
   private
   def candidate_params
     params.require(:candidate).permit(:name, :party, :age, :politics)

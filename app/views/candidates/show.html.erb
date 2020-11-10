@@ -1,15 +1,23 @@
-<h1>
-    <%= @candidate.name %>
-</h1>
+<% if @candidate %>
 
-<ul>
-    <li>age:
-        <%=@candidate.age %>
-    </li>
-    <li>party:
-        <%=@candidate.party %>
-    </li>
-    <li>politics:
-        <%=@candidate.politics %>
-    </li>
-</ul>
+    <h1>
+        <%= @candidate.name %>
+            <!--有輸出值才需要加等號-->
+    </h1>
+
+    <ul>
+        <li>age:
+            <%= @candidate.age %>
+        </li>
+        <li>party:
+            <%= @candidate.party %>
+        </li>
+        <li>politics:
+            <%= @candidate.politics %>
+        </li>
+    </ul>
+    <% else %>
+
+        <h1>No Record Found !</h1>
+
+        <% end %>
