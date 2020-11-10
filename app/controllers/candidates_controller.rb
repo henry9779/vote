@@ -20,7 +20,7 @@ class CandidatesController < ApplicationController
   end
 
   def show
-    params[:id]
+    @candidate = Candidate.find_by(id: params[:id])
   end
 
   private
