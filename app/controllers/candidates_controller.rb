@@ -47,7 +47,8 @@ class CandidatesController < ApplicationController
     # @candidate.increment(:vote) 遞增投票
     # @candidate.save 存檔
     flash[:notice] = "Voted !"
-    VoteMailer.vote_notify('henry@gmail.com').deliver
+    # VoteMailer.vote_notify('henry@gmail.com').deliver
+    VoteMailJob.perform_later
     redirect_to '/candidates'
   end
 
